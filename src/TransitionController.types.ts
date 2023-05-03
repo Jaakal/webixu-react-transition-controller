@@ -7,8 +7,6 @@ export enum TransitionDirection {
 }
 
 export type RefObjects<T> = {
-  element: RefObject<Element>;
-} & {
   [Property in keyof T]: RefObject<T[Property]>;
 };
 
