@@ -1,6 +1,6 @@
 {
   "name": "webixu-react-transition-controller",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React transition controller",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
