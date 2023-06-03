@@ -10,8 +10,7 @@
   },
   "scripts": {
     "build": "npx tsc",
-    "test": "jest",
-    "publish": "publish"
+    "test": "jest"
   },
   "author": "Jaak Kivinukk",
   "license": "MIT",
