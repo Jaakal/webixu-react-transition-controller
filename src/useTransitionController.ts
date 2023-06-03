@@ -1,8 +1,11 @@
 import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
-import { destructureRefsObject } from 'webixu-react-utils';
+import { destructureRefObjects } from 'webixu-react-utils';
 import { useTransitionControllerStore } from './useTransitionControllerStore';
-import { TransitionControllerParameters, TransitionController } from './TransitionController.types';
+import {
+  TransitionControllerParameters,
+  TransitionController,
+} from './TransitionController.types';
 
 export const useTransitionController = <T extends {}>(
   {
@@ -17,8 +20,11 @@ export const useTransitionController = <T extends {}>(
   const elements = useRef<T>();
   const transitionInTimeline = useRef<gsap.core.Timeline>(gsap.timeline());
   const transitionOutTimeline = useRef<gsap.core.Timeline>(gsap.timeline());
-  const { setElementTransitionController, getElementTimeline, deleteElementTransitionController } =
-    useTransitionControllerStore();
+  const {
+    setElementTransitionController,
+    getElementTimeline,
+    deleteElementTransitionController,
+  } = useTransitionControllerStore();
 
   const transitionController = useRef<TransitionController>({
     transitionIn: () => {
@@ -26,9 +32,13 @@ export const useTransitionController = <T extends {}>(
       transitionInTimeline.current.kill();
       transitionInTimeline.current = gsap.timeline();
 
-      setupTransitionInTimeline(elements.current!, transitionInTimeline.current, {
-        getElementTimeline,
-      });
+      setupTransitionInTimeline(
+        elements.current!,
+        transitionInTimeline.current,
+        {
+          getElementTimeline,
+        }
+      );
 
       return transitionInTimeline.current;
     },
@@ -39,9 +49,13 @@ export const useTransitionController = <T extends {}>(
         transitionOutTimeline.current.kill();
         transitionOutTimeline.current = gsap.timeline();
 
-        setupTransitionOutTimeline(elements.current!, transitionOutTimeline.current, {
-          getElementTimeline,
-        });
+        setupTransitionOutTimeline(
+          elements.current!,
+          transitionOutTimeline.current,
+          {
+            getElementTimeline,
+          }
+        );
 
         return transitionOutTimeline.current;
       }
@@ -53,10 +67,13 @@ export const useTransitionController = <T extends {}>(
   });
 
   useLayoutEffect(() => {
-    elements.current = destructureRefsObject<T>(refs);
+    elements.current = destructureRefObjects<T>(refs);
 
     if (exposeTransitionController) {
-      setElementTransitionController(ref.current!, transitionController.current);
+      setElementTransitionController(
+        ref.current!,
+        transitionController.current
+      );
     } else {
       transitionController.current.transitionIn();
       transitionInTimeline.current.pause();
