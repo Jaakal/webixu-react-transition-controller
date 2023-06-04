@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { destructureRefObjects } from 'webixu-react-utils';
 import { useTransitionControllerStore } from './useTransitionControllerStore';
@@ -66,7 +66,7 @@ export const useTransitionController = <T extends {}>(
     },
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     elements.current = destructureRefObjects<T>(refs);
 
     if (exposeTransitionController) {
